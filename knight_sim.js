@@ -1,4 +1,4 @@
-const Square = () => {
+const Cell = () => {
     let isOccupied = false;
 
     const occupy = () => {
@@ -19,14 +19,20 @@ const Square = () => {
 }
 
 const Board = () => {
-    const board = [
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()],
-        [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()]
+    const grid = [
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
+        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()]
     ];
+
+    return {
+        get grid() {
+            return grid;
+        }
+    }
 }
