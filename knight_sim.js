@@ -52,9 +52,6 @@ const Board = () => {
         get grid() {
             return grid;
         },
-        get _graph() {
-            return _graph
-        },
         placePiece
     }
 }
