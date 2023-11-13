@@ -1,38 +1,44 @@
-const Cell = () => {
-    let isOccupied = false;
+const Knight = () => {
+    const moves = [
+        [1, 2],
+        [2, 1],
+        [-1, 2],
+        [2, -1],
+        [1, -2],
+        [-2, 1],
+        [-1, -2],
+        [-2, -1]
+    ];
 
-    const occupy = () => {
-        isOccupied = true;
-    }
-
-    const deoccupy = () => {
-        isOccupied = false;
-    }
-
-    return {
-        get isOccupied() {
-            return isOccupied
-        },
-        occupy,
-        deoccupy
-    }
+    return { moves };
 }
 
 const Board = () => {
     const grid = [
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()],
-        [Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell(), Cell()]
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null, null]
     ];
+
+    const placePiece = (piece, col, row) => {
+        grid[col][row] = piece;
+        return grid;
+    }
 
     return {
         get grid() {
             return grid;
-        }
+        },
+        placePiece
     }
+}
+
+module.exports = {
+    Knight,
+    Board
 }
