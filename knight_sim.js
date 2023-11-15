@@ -49,16 +49,13 @@ const Board = () => {
         return result
     }
 
-    const knightMoves = (start, end) => {
-        const ignore = [];
-        const visited = {};
-        let queue = [];
-        let buffer = [];
-        // Stringify coordinate pair to be used as object child
-        const path = JSON.stringify(start);
-        visited[path] = null;
-        // Buffer concats to queue to begin loop
-        buffer.push(start);
+    /**
+     * Returns an array containing all shortest paths from start to target following the given moves
+     * @param   {Array} start  An array of 2 integers between 0 and 7
+     * @param   {Array} target An array of 2 integers between 0 and 7
+     * @returns {Array}        An array of arrays containing arrays of 2 integers between 0 and 7
+     */
+    const knightMoves = (start, target) => {
         const moves = [
             [1, 2],
             [2, 1],
@@ -69,14 +66,26 @@ const Board = () => {
             [-1, -2],
             [-2, -1]
         ];
+        const ignore = [];
+
+        const graph = {};
+        // Stringify coordinate pair to be used as object child
+        const root = JSON.stringify(start);
+        graph[root] = null;
+
+        let queue = [];
+        // Buffer must pass starting vertex to queue
+        let buffer = [start];
+
         // Buffer allows queue to retrieve all paths of shortest length, instead of just the first
-        while (!(JSON.stringify(end) in visited)) {
+        while (!(JSON.stringify(target) in graph)) {
             queue = queue.concat(buffer);
+            // Ignore in buffer allows vertices to have multiple parents only if they occur in the same BFS wave
             for (const child of buffer) {
                 ignore.push(JSON.stringify(child));
             }
             buffer = [];
-            // Only receives new coordinates after emptying itself; waves of BFS
+            // Only receives new coordinates after emptying itself, creating waves of BFS
             while (!(queue.length === 0)) {
                 const [ currentX, currentY ] = queue.shift();
                 // Stringify coordinate pair to reference object child
@@ -86,20 +95,19 @@ const Board = () => {
                     const yPos = currentY + dy;
                     // Stringify coordinate pair to be used as object child
                     const child = JSON.stringify([xPos, yPos])
-                    // X and Y must be between 0 and 7 and cannot be the origin
+                    // X and Y must be between 0 and 7 and cannot have been traversed in a previous BFS wave
                     if (xPos >= 0 && xPos <= 7 && yPos >= 0 && yPos <= 7 && !(ignore.includes(child))) {
-                        if (child in visited) {
-                            visited[child].push(parent);
+                        if (child in graph) {
+                            graph[child].push(parent);
                         } else {
-                            visited[child] = [parent];
+                            graph[child] = [parent];
                             buffer.push([xPos, yPos]);
                         }
                     }
                 }
             }
         }
-
-        return _getMoves(visited, JSON.stringify(end), [], []);
+        return _getMoves(graph, JSON.stringify(target), [], []);
     }
 
     return {
