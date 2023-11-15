@@ -37,6 +37,7 @@ const Board = () => {
 
     // TODO: Bug with visited vertices causing some solutions to fall through the cracks; children need multiple parents
     const knightMoves = (start, end) => {
+        const ignore = [];
         const visited = {};
         let queue = [];
         let buffer = [];
@@ -58,7 +59,12 @@ const Board = () => {
         // Buffer allows queue to retrieve all paths of shortest length, instead of just the first
         while (!(JSON.stringify(end) in visited)) {
             queue = queue.concat(buffer);
+            for (const child of buffer) {
+                ignore.push(JSON.stringify(child));
+            }
             buffer = [];
+            console.log(ignore);
+            console.log();
             // Only receives new coordinates after emptying itself; waves of BFS
             while (!(queue.length === 0)) {
                 const [ currentX, currentY ] = queue.shift();
@@ -70,7 +76,7 @@ const Board = () => {
                     // Stringify coordinate pair to be used as object child
                     const child = JSON.stringify([xPos, yPos])
                     // X and Y must be between 0 and 7 and cannot be the origin
-                    if (xPos >= 0 && xPos <= 7 && yPos >= 0 && yPos <= 7 && !(xPos === start[0] && yPos === start[1])) {
+                    if (xPos >= 0 && xPos <= 7 && yPos >= 0 && yPos <= 7 && !(ignore.includes(child))) {
                         if (child in visited) {
                             visited[child].push(parent);
                         } else {
@@ -87,16 +93,9 @@ const Board = () => {
                 result.push(path);
             } else {
                 const parents = graph[child];
-                // Create unique paths for each parent
-                const paths = [];
-                for (let i = 0; i < parents.length; i++) {
-                    // Use shallow copies of main path
-                    paths.push(path.slice());
-                }
-                let j = 0;
                 for (const parent of parents) {
-                    dfsUtil(graph, parent, paths[j], result);
-                    j++;
+                    // Pass shallow path copy so each DFS call produces a unique path
+                    dfsUtil(graph, parent, path.slice(), result);
                 }
             }
         }
@@ -116,9 +115,6 @@ const Board = () => {
         knightMoves
     }
 }
-
-const board = Board();
-console.log(board.knightMoves([3, 3], [4, 3]));
 
 module.exports = {
     Knight,
