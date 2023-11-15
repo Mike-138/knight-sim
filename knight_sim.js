@@ -35,7 +35,7 @@ const Board = () => {
         return grid;
     }
 
-    const _getMoves = (graph, child, path, result) => {
+    const _getMoves = (graph, child, path = [], result = []) => {
         path.unshift(JSON.parse(child));
         if (!graph[child]) {
             result.push(path);
@@ -107,7 +107,7 @@ const Board = () => {
                 }
             }
         }
-        return _getMoves(graph, JSON.stringify(target), [], []);
+        return _getMoves(graph, JSON.stringify(target));
     }
 
     return {
