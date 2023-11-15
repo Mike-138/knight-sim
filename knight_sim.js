@@ -35,7 +35,20 @@ const Board = () => {
         return grid;
     }
 
-    // TODO: Bug with visited vertices causing some solutions to fall through the cracks; children need multiple parents
+    const _getMoves = (graph, child, path, result) => {
+        path.unshift(JSON.parse(child));
+        if (!graph[child]) {
+            result.push(path);
+        } else {
+            const parents = graph[child];
+            for (const parent of parents) {
+                // Pass shallow path copy so each DFS call produces a unique path
+                _getMoves(graph, parent, path.slice(), result);
+            }
+        }
+        return result
+    }
+
     const knightMoves = (start, end) => {
         const ignore = [];
         const visited = {};
@@ -63,8 +76,6 @@ const Board = () => {
                 ignore.push(JSON.stringify(child));
             }
             buffer = [];
-            console.log(ignore);
-            console.log();
             // Only receives new coordinates after emptying itself; waves of BFS
             while (!(queue.length === 0)) {
                 const [ currentX, currentY ] = queue.shift();
@@ -87,24 +98,8 @@ const Board = () => {
                 }
             }
         }
-        const dfsUtil = (graph, child, path, result) => {
-            path.unshift(JSON.parse(child));
-            if (!graph[child]) {
-                result.push(path);
-            } else {
-                const parents = graph[child];
-                for (const parent of parents) {
-                    // Pass shallow path copy so each DFS call produces a unique path
-                    dfsUtil(graph, parent, path.slice(), result);
-                }
-            }
-        }
-        const getResult = () => {
-            const result = [];
-            dfsUtil(visited, JSON.stringify(end), [], result);
-            return result;
-        }
-        return getResult();
+
+        return _getMoves(visited, JSON.stringify(end), [], []);
     }
 
     return {
