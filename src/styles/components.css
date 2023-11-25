@@ -1,11 +1,32 @@
+:root {
+    --cell-width: 4rem;
+}
+
 .cell {
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid black;
+    width: var(--cell-width);
+    height: var(--cell-width);
 }
 
 .board {
+    width: calc(var(--cell-width) * 8);
+    height: calc(var(--cell-width) * 8);
     display: flex;
     flex-wrap: wrap;
-    box-sizing: content-box;
+    border: 1px solid black;
+    /* Orient chess board to start from bottom left */
+    transform: scaleY(-1);
+}
+
+.cell[data-row="0"]:nth-child(odd),
+.cell[data-row="2"]:nth-child(odd),
+.cell[data-row="4"]:nth-child(odd),
+.cell[data-row="6"]:nth-child(odd) {
+    background-color: black;
+}
+
+.cell[data-row="1"]:nth-child(even),
+.cell[data-row="3"]:nth-child(even),
+.cell[data-row="5"]:nth-child(even),
+.cell[data-row="7"]:nth-child(even) {
+    background-color: black;
 }
