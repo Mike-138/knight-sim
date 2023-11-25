@@ -1,0 +1,11 @@
+.cell {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid black;
+}
+
+.board {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+}
