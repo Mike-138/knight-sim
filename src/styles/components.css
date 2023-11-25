@@ -5,6 +5,7 @@
 .cell {
     width: var(--cell-width);
     height: var(--cell-width);
+    box-sizing: border-box;
 }
 
 .board {
@@ -29,4 +30,13 @@
 .cell[data-row="5"]:nth-child(even),
 .cell[data-row="7"]:nth-child(even) {
     background-color: black;
+}
+
+.cell:hover {
+    border: 2px solid red;
+}
+
+.cell:focus {
+    border: 2px solid blue;
+    outline: none;
 }
