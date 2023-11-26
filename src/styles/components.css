@@ -22,14 +22,14 @@
 .cell[data-row="2"]:nth-child(odd),
 .cell[data-row="4"]:nth-child(odd),
 .cell[data-row="6"]:nth-child(odd) {
-    background-color: black;
+    background-color: green;
 }
 
 .cell[data-row="1"]:nth-child(even),
 .cell[data-row="3"]:nth-child(even),
 .cell[data-row="5"]:nth-child(even),
 .cell[data-row="7"]:nth-child(even) {
-    background-color: black;
+    background-color: green;
 }
 
 .cell:hover {
