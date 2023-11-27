@@ -1,4 +1,3 @@
-import * as comp from "./components";
+import * as display from "./display_controller";
 
-const board = comp.Board();
-document.body.append(board);
+display.build();
