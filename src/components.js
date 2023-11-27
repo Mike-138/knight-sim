@@ -31,6 +31,7 @@ const Board = () => {
 }
 
 export {
+    Knight,
     Cell,
     Board
 }
