@@ -30,8 +30,14 @@ const Board = () => {
     return container;
 }
 
+const Button = () => {
+    const container = document.createElement("button");
+    return container;
+}
+
 export {
     Knight,
     Cell,
-    Board
+    Board,
+    Button
 }
