@@ -12,10 +12,9 @@
     width: calc(var(--cell-width) * 8);
     height: calc(var(--cell-width) * 8);
     display: flex;
-    flex-wrap: wrap;
+    /* Render squares left-right bottom-up */
+    flex-wrap: wrap-reverse;
     border: 1px solid black;
-    /* Orient chess board to start from bottom left */
-    transform: scaleY(-1);
 }
 
 .cell[data-row="0"]:nth-child(odd),
