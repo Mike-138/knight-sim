@@ -6,7 +6,8 @@ const build = () => {
     const startButton = comp.StartButton();
     const endButton = comp.EndButton();
     const resultButton = comp.ResultButton();
-    logic.addStart(board);
+    const boardListener = logic.boardListener(board)
+    boardListener.selectStart();
     document.body.append(
         board,
         startButton,

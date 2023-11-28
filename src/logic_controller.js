@@ -1,21 +1,29 @@
 import * as comp from "./components";
 
 
-/* Callback function to be attached to board object */
-const addStart = function(board) {
+const boardListener = (board) => {
     const cells = board.querySelectorAll(".cell");
-    for (const cell of cells) {
-        cell.addEventListener("mousedown", (e) => {
-            for (const cell of cells) {
-                if (cell.firstChild) {
-                    cell.firstChild.remove();
-                }
+
+    const __startHandler = function() {
+        for (const cell of cells) {
+            if (cell.firstChild) {
+                cell.firstChild.remove();
             }
-            cell.append(comp.Knight());
-        })
+        }
+        this.append(comp.Knight());
+    }
+
+    const selectStart = function() {
+        for (const cell of cells) {
+            cell.addEventListener("mousedown", __startHandler);
+        }
+    }
+
+    return {
+        selectStart
     }
 }
 
 export {
-    addStart
+    boardListener
 }
