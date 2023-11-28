@@ -5,7 +5,7 @@ import * as comp from "./components";
 const addStart = function(board) {
     const cells = board.querySelectorAll(".cell");
     for (const cell of cells) {
-        cell.addEventListener("click", () => {
+        cell.addEventListener("mousedown", (e) => {
             for (const cell of cells) {
                 if (cell.firstChild) {
                     cell.firstChild.remove();
