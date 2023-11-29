@@ -1,18 +1,15 @@
-import * as comp from "./components";
 import * as logic from "./logic_controller";
 
 const build = () => {
-    const board = comp.Board();
-    const startButton = comp.StartButton();
-    const endButton = comp.EndButton();
-    const resultButton = comp.ResultButton();
-    const boardListener = logic.boardListener(board)
-    boardListener.selectStart();
+
+    logic.startButton.addEventListener("click", logic.__addStartHandlers);
+    logic.targetButton.addEventListener("click", logic.__addTargetHandlers);
+
     document.body.append(
-        board,
-        startButton,
-        endButton,
-        resultButton
+        logic.board,
+        logic.startButton,
+        logic.targetButton,
+        logic.resultButton
     );
 }
 

@@ -1,29 +1,57 @@
 import * as comp from "./components";
 
 
-const boardListener = (board) => {
-    const cells = board.querySelectorAll(".cell");
+const board = comp.Board();
+// Use getElementsByClassName to return a live HTMLCollection
+const _cells = board.getElementsByClassName("cell");
 
-    const __startHandler = function() {
-        for (const cell of cells) {
-            if (cell.firstChild) {
-                cell.firstChild.remove();
-            }
-        }
-        this.append(comp.Knight());
+const startButton = comp.ContentButton("Select Start");
+const targetButton = comp.ContentButton("Select Target");
+const resultButton = comp.ContentButton("Find Shortest Paths");
+
+const __startHandler = function() {
+    // Returns null if there is no active start
+    const activeStart = _cells.namedItem("start");
+    if (activeStart) {
+        activeStart.firstChild.remove();
+        activeStart.removeAttribute("id");
     }
+    this.append(comp.Knight());
+    this.setAttribute("id", "start");
+}
 
-    const selectStart = function() {
-        for (const cell of cells) {
-            cell.addEventListener("mousedown", __startHandler);
-        }
+const __targetHandler = function() {
+    // Returns null if there is no active target
+    const activeTarget = _cells.namedItem("target");
+    if (activeTarget) {
+        activeTarget.classList.remove("target");
+        activeTarget.removeAttribute("id");
     }
+    this.classList.add("target");
+    this.setAttribute("id", "target");
+}
 
-    return {
-        selectStart
+const _addHandlers = function(handler) {
+    for (const cell of _cells) {
+        cell.removeEventListener("mousedown", __startHandler);
+        cell.removeEventListener("mousedown", __targetHandler);
+        cell.addEventListener("mousedown", handler);
     }
 }
 
+const __addStartHandlers = () => {
+    _addHandlers(__startHandler);
+}
+
+const __addTargetHandlers = () => {
+    _addHandlers(__targetHandler);
+}
+
 export {
-    boardListener
+    board,
+    startButton,
+    targetButton,
+    resultButton,
+    __addStartHandlers,
+    __addTargetHandlers,
 }
