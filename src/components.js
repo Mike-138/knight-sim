@@ -30,21 +30,9 @@ const Board = () => {
     return container;
 }
 
-const StartButton = () => {
+const ContentButton = (content) => {
     const container = document.createElement("button");
-    container.textContent = "Start Position";
-    return container;
-}
-
-const EndButton = () => {
-    const container = document.createElement("button");
-    container.textContent = "End Position";
-    return container;
-}
-
-const ResultButton = () => {
-    const container = document.createElement("button");
-    container.textContent = "Find Shortest Paths";
+    container.textContent = content;
     return container;
 }
 
@@ -52,7 +40,5 @@ export {
     Knight,
     Cell,
     Board,
-    StartButton,
-    EndButton,
-    ResultButton
+    ContentButton
 }
