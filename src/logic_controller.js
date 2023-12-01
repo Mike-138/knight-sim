@@ -5,10 +5,6 @@ const board = comp.Board();
 // Use getElementsByClassName to return a live HTMLCollection
 const _cells = board.getElementsByClassName("cell");
 
-const startButton = comp.ContentButton("Select Start");
-const targetButton = comp.ContentButton("Select Target");
-const resultButton = comp.ContentButton("Find Shortest Paths");
-
 const __startHandler = function() {
     // Returns null if there is no active start
     const activeStart = _cells.namedItem("start");
@@ -49,9 +45,6 @@ const __addTargetHandlers = () => {
 
 export {
     board,
-    startButton,
-    targetButton,
-    resultButton,
     __addStartHandlers,
     __addTargetHandlers,
 }

@@ -30,15 +30,8 @@ const Board = () => {
     return container;
 }
 
-const ContentButton = (content) => {
-    const container = document.createElement("button");
-    container.textContent = content;
-    return container;
-}
-
 export {
     Knight,
     Cell,
     Board,
-    ContentButton
 }
