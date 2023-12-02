@@ -15,7 +15,7 @@ const SolutionContainer = (num, array) => {
 
     for (const square of array) {
         const item = document.createElement("li");
-        item.textContent = square;
+        item.textContent = `[${square[0]}, ${square[1]}]`;
         list.append(item);
     }
 
