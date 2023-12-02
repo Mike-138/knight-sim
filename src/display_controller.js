@@ -15,8 +15,8 @@ const build = () => {
     startButton.addEventListener("click", logic.__addStartHandlers);
     targetButton.addEventListener("click", logic.__addTargetHandlers);
     resultButton.addEventListener("click", () => {
-        const start = document.getElementById("start");
-        const target = document.getElementById("target");
+        const start = document.querySelector("[data-start]");
+        const target = document.querySelector("[data-target]");
         const results = logic.knightMoves([Number(start.dataset.row), Number(start.dataset.col)], [Number(target.dataset.row), Number(target.dataset.col)]);
         for (const result of results) {
             console.log(result);
