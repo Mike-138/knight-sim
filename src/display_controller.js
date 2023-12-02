@@ -6,6 +6,25 @@ const ContentButton = (content) => {
     return container;
 }
 
+const SolutionContainer = (num, array) => {
+    const container = document.createElement("details");
+    const summary = document.createElement("summary");
+    const list = document.createElement("ol");
+
+    summary.textContent = `Solution ${num}`;
+
+    for (const square of array) {
+        const item = document.createElement("li");
+        item.textContent = square;
+        list.append(item);
+    }
+
+    container.append(summary, list);
+    return container;
+}
+
+const solutionDiv = document.createElement("div");
+
 const build = () => {
 
     const startButton = ContentButton("Select Start");
@@ -18,16 +37,19 @@ const build = () => {
         const start = document.querySelector("[data-start]");
         const target = document.querySelector("[data-target]");
         const results = logic.knightMoves([Number(start.dataset.row), Number(start.dataset.col)], [Number(target.dataset.row), Number(target.dataset.col)]);
-        for (const result of results) {
-            console.log(result);
+        const listOfSolutions = [];
+        for (let i = 0; i < results.length; i++) {
+            listOfSolutions.push(SolutionContainer(i + 1, results[i]));
         }
+        solutionDiv.replaceChildren(...listOfSolutions);
     })
 
     document.body.append(
         logic.board,
         startButton,
         targetButton,
-        resultButton
+        resultButton,
+        solutionDiv
     );
 }
 
