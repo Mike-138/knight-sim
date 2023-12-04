@@ -19,6 +19,15 @@ const SolutionContainer = (num, array) => {
         list.append(item);
     }
 
+    container.addEventListener("toggle", () => {
+        const squares = document.querySelectorAll(".blue");
+        squares.forEach((square) => square.classList.remove("blue"));
+        for (const square of array) {
+            const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
+            activeSquare.classList.add("blue");
+        }
+    })
+
     container.append(summary, list);
     return container;
 }
