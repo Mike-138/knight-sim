@@ -6,6 +6,8 @@ const ContentButton = (content) => {
     return container;
 }
 
+let lastSelectedSolution;
+
 const SolutionContainer = (num, array) => {
     const container = document.createElement("details");
     const summary = document.createElement("summary");
@@ -21,9 +23,19 @@ const SolutionContainer = (num, array) => {
 
     container.addEventListener("toggle", (event) => {
         const squares = document.querySelectorAll(".blue");
-        squares.forEach((square) => square.classList.remove("blue"));
+        // Condition ensures deselection only occurs upon toggling the active detail off
+        if (lastSelectedSolution === event.target) {
+            squares.forEach((square) => square.classList.remove("blue"));
+        }
         // Only add blue background when toggled open
         if (event.target.open) {
+            if (lastSelectedSolution) {
+                // Calls event on last solution after this event completes -- will not trigger deselection
+                lastSelectedSolution.open = false;
+            }
+            lastSelectedSolution = event.target;
+            // Necessary to clear squares on this line when switching between solutions without toggling last solution off first
+            squares.forEach((square) => square.classList.remove("blue"));
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
                 // TODO: Overwrite green background color
