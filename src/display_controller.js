@@ -22,10 +22,10 @@ const SolutionContainer = (num, array) => {
     }
 
     container.addEventListener("toggle", (event) => {
-        const squares = document.querySelectorAll(".blue");
+        const squares = document.querySelectorAll("[style='background-color: blue;']");
         // Condition ensures deselection only occurs upon toggling the active detail off
         if (lastSelectedSolution === event.target) {
-            squares.forEach((square) => square.classList.remove("blue"));
+            squares.forEach((square) => square.style.removeProperty("background-color"));
         }
         // Only add blue background when toggled open
         if (event.target.open) {
@@ -35,11 +35,11 @@ const SolutionContainer = (num, array) => {
             }
             lastSelectedSolution = event.target;
             // Necessary to clear squares on this line when switching between solutions without toggling last solution off first
-            squares.forEach((square) => square.classList.remove("blue"));
+            squares.forEach((square) => square.style.removeProperty("background-color"));
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
                 // TODO: Overwrite green background color
-                activeSquare.classList.add("blue");
+                activeSquare.style.backgroundColor = "blue";
             }
         }
     })
