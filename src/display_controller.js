@@ -11,7 +11,23 @@ import EightIcon from "./assets/icons/numeric-8.svg";
 import NineIcon from "./assets/icons/numeric-9.svg";
 
 
-const MOVE_NUMBER_ICON = [ZeroIcon, OneIcon, TwoIcon, ThreeIcon, FourIcon, FiveIcon, SixIcon, SevenIcon, EightIcon, NineIcon];
+const IconContainer = (icon) => {
+    const container = document.createElement("img");
+    container.src = icon;
+    return container;
+}
+
+const MOVE_NUMBER_ICON = [
+    IconContainer(ZeroIcon),
+    IconContainer(OneIcon),
+    IconContainer(TwoIcon),
+    IconContainer(ThreeIcon),
+    IconContainer(FourIcon),
+    IconContainer(FiveIcon),
+    IconContainer(SixIcon),
+    IconContainer(SevenIcon),
+    IconContainer(EightIcon),
+    IconContainer(NineIcon)];
 
 const ContentButton = (content) => {
     const container = document.createElement("button");
@@ -49,10 +65,13 @@ const SolutionContainer = (num, array) => {
             lastSelectedSolution = event.target;
             // Necessary to clear squares on this line when switching between solutions without toggling last solution off first
             squares.forEach((square) => square.style.removeProperty("background-color"));
+            let currentMove = 0;
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
                 // TODO: Overwrite green background color
                 activeSquare.style.backgroundColor = "blue";
+                activeSquare.append(MOVE_NUMBER_ICON[currentMove]);
+                currentMove += 1;
             }
         }
     })
