@@ -3,9 +3,14 @@
 }
 
 .cell {
+    position: relative;
     width: var(--cell-width);
     height: var(--cell-width);
     box-sizing: border-box;
+}
+
+.cell > * {
+    position: absolute;
 }
 
 .board {
