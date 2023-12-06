@@ -1,4 +1,17 @@
 import * as logic from "./logic_controller";
+import ZeroIcon from "./assets/icons/numeric-0.svg";
+import OneIcon from "./assets/icons/numeric-1.svg";
+import TwoIcon from "./assets/icons/numeric-2.svg";
+import ThreeIcon from "./assets/icons/numeric-3.svg";
+import FourIcon from "./assets/icons/numeric-4.svg";
+import FiveIcon from "./assets/icons/numeric-5.svg";
+import SixIcon from "./assets/icons/numeric-6.svg";
+import SevenIcon from "./assets/icons/numeric-7.svg";
+import EightIcon from "./assets/icons/numeric-8.svg";
+import NineIcon from "./assets/icons/numeric-9.svg";
+
+
+const MOVE_NUMBER_ICON = [ZeroIcon, OneIcon, TwoIcon, ThreeIcon, FourIcon, FiveIcon, SixIcon, SevenIcon, EightIcon, NineIcon];
 
 const ContentButton = (content) => {
     const container = document.createElement("button");
