@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 
+/* Ensure all child elements of cells overlap */
 .cell > * {
     position: absolute;
 }

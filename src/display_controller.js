@@ -41,6 +41,8 @@ const SolutionContainer = (num, array) => {
     const container = document.createElement("details");
     const summary = document.createElement("summary");
     const list = document.createElement("ol");
+    // Start move index from 0
+    list.start = 0;
 
     summary.textContent = `Solution ${num}`;
 
