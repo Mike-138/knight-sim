@@ -11,23 +11,24 @@ import EightIcon from "./assets/icons/numeric-8.svg";
 import NineIcon from "./assets/icons/numeric-9.svg";
 
 
-const IconContainer = (icon) => {
+const NumberContainer = (icon) => {
     const container = document.createElement("img");
     container.src = icon;
+    container.classList.add("number");
     return container;
 }
 
 const MOVE_NUMBER_ICON = [
-    IconContainer(ZeroIcon),
-    IconContainer(OneIcon),
-    IconContainer(TwoIcon),
-    IconContainer(ThreeIcon),
-    IconContainer(FourIcon),
-    IconContainer(FiveIcon),
-    IconContainer(SixIcon),
-    IconContainer(SevenIcon),
-    IconContainer(EightIcon),
-    IconContainer(NineIcon)];
+    NumberContainer(ZeroIcon),
+    NumberContainer(OneIcon),
+    NumberContainer(TwoIcon),
+    NumberContainer(ThreeIcon),
+    NumberContainer(FourIcon),
+    NumberContainer(FiveIcon),
+    NumberContainer(SixIcon),
+    NumberContainer(SevenIcon),
+    NumberContainer(EightIcon),
+    NumberContainer(NineIcon)];
 
 const ContentButton = (content) => {
     const container = document.createElement("button");
@@ -56,7 +57,13 @@ const SolutionContainer = (num, array) => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         // Condition ensures deselection only occurs upon toggling the active detail off
         if (lastSelectedSolution === event.target) {
-            squares.forEach((square) => square.style.removeProperty("background-color"));
+            squares.forEach((square) => {
+                square.style.removeProperty("background-color");
+                const numberIcon = square.querySelector(".number");
+                if (numberIcon) {
+                    square.removeChild(numberIcon);
+                }
+            });
         }
         // Only add blue background when toggled open
         if (event.target.open) {
@@ -66,7 +73,13 @@ const SolutionContainer = (num, array) => {
             }
             lastSelectedSolution = event.target;
             // Necessary to clear squares on this line when switching between solutions without toggling last solution off first
-            squares.forEach((square) => square.style.removeProperty("background-color"));
+            squares.forEach((square) => {
+                square.style.removeProperty("background-color");
+                const numberIcon = square.querySelector(".number");
+                if (numberIcon) {
+                    square.removeChild(numberIcon);
+                }
+            });
             let currentMove = 0;
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
