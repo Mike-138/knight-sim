@@ -29,7 +29,7 @@ const SolutionContainer = (num, array) => {
         }
         // Only add blue background when toggled open
         if (event.target.open) {
-            if (lastSelectedSolution) {
+            if (lastSelectedSolution && lastSelectedSolution !== event.target) {
                 // Calls event on last solution after this event completes -- will not trigger deselection
                 lastSelectedSolution.open = false;
             }
