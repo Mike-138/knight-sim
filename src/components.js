@@ -4,6 +4,7 @@ import KnightIcon from "./assets/icons/chess-knight.svg"
 const Knight = () => {
     const container = document.createElement("img");
     container.src = KnightIcon;
+    container.classList.add("knight");
     return container;
 }
 
