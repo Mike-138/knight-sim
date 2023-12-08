@@ -36,6 +36,14 @@ const ContentButton = (content) => {
     return container;
 }
 
+const hideNumber = (square, numberIcon) => {
+    if (square.querySelector(".knight") !== null) {
+        numberIcon.classList.add("hidden");
+    } else {
+        numberIcon.classList.remove("hidden");
+    }
+}
+
 const resetBoard = (array) => {
     array.forEach((item) => {
         item.style.removeProperty("background-color");
