@@ -36,6 +36,16 @@ const ContentButton = (content) => {
     return container;
 }
 
+const resetBoard = (array) => {
+    array.forEach((item) => {
+        item.style.removeProperty("background-color");
+        const numberIcon = item.querySelector(".number");
+        if (numberIcon) {
+            item.removeChild(numberIcon);
+        }
+    });
+}
+
 let lastSelectedSolution;
 
 const SolutionContainer = (num, array) => {
@@ -57,13 +67,7 @@ const SolutionContainer = (num, array) => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         // Condition ensures deselection only occurs upon toggling the active detail off
         if (lastSelectedSolution === event.target) {
-            squares.forEach((square) => {
-                square.style.removeProperty("background-color");
-                const numberIcon = square.querySelector(".number");
-                if (numberIcon) {
-                    square.removeChild(numberIcon);
-                }
-            });
+            resetBoard(squares);
         }
         // Only add blue background when toggled open
         if (event.target.open) {
@@ -73,13 +77,7 @@ const SolutionContainer = (num, array) => {
             }
             lastSelectedSolution = event.target;
             // Necessary to clear squares on this line when switching between solutions without toggling last solution off first
-            squares.forEach((square) => {
-                square.style.removeProperty("background-color");
-                const numberIcon = square.querySelector(".number");
-                if (numberIcon) {
-                    square.removeChild(numberIcon);
-                }
-            });
+            resetBoard(squares);
             let currentMove = 0;
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
@@ -103,8 +101,16 @@ const build = () => {
     const targetButton = ContentButton("Select Target");
     const resultButton = ContentButton("Find Shortest Paths");
 
-    startButton.addEventListener("click", logic.__addStartHandlers);
-    targetButton.addEventListener("click", logic.__addTargetHandlers);
+    startButton.addEventListener("click", () => {
+        const squares = document.querySelectorAll("[style='background-color: blue;']");
+        resetBoard(squares);
+        logic.__addStartHandlers();
+    });
+    targetButton.addEventListener("click", () => {
+        const squares = document.querySelectorAll("[style='background-color: blue;']");
+        resetBoard(squares);
+        logic.__addTargetHandlers();
+    });
     resultButton.addEventListener("click", () => {
         const start = document.querySelector("[data-start]");
         const target = document.querySelector("[data-target]");
