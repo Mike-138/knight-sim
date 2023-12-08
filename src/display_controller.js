@@ -104,11 +104,13 @@ const build = () => {
     startButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         resetBoard(squares);
+        solutionDiv.replaceChildren();
         logic.__addStartHandlers();
     });
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         resetBoard(squares);
+        solutionDiv.replaceChildren();
         logic.__addTargetHandlers();
     });
     resultButton.addEventListener("click", () => {
