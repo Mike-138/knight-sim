@@ -49,3 +49,7 @@
 .target, .target:focus {
     border: 4px solid gold;
 }
+
+.hidden {
+    display: none;
+}
