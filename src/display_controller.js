@@ -97,7 +97,6 @@ const SolutionContainer = (num, array) => {
             }
         }
     })
-
     container.append(summary, list);
     return container;
 }
