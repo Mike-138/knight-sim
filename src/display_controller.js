@@ -89,7 +89,6 @@ const SolutionContainer = (num, array) => {
             let currentMove = 0;
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
-                // TODO: Overwrite green background color
                 activeSquare.style.backgroundColor = "blue";
                 hideNumber(activeSquare, MOVE_NUMBER_ICON[currentMove]);
                 activeSquare.append(MOVE_NUMBER_ICON[currentMove]);
