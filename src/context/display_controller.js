@@ -105,6 +105,7 @@ const SolutionContainer = (num, array) => {
                 activeSquare.append(MOVE_NUMBER_ICON[currentMove]);
                 currentMove += 1;
             }
+            handler.returnKnight();
             hideNumber(array);
             // Update navigation buttons depending on selected solution
             forwardButton.removeEventListener("click", __activeForwardHandler);

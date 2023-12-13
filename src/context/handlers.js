@@ -66,10 +66,17 @@ const __backwardHandler = function(array) {
     }
 }
 
+const returnKnight = () => {
+    document.querySelector(".knight").remove();
+    document.querySelector('[data-start="true"]').append(comp.Knight());
+    _currentposition = 0;
+}
+
 export {
     board,
     __addStartHandler,
     __addTargetHandler,
     __forwardHandler,
-    __backwardHandler
+    __backwardHandler,
+    returnKnight
 }
