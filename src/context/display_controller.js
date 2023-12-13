@@ -1,4 +1,4 @@
-import * as logic from "./logic_controller";
+import * as logic from "./utils/logic_controller";
 import ZeroIcon from "./assets/icons/numeric-0.svg";
 import OneIcon from "./assets/icons/numeric-1.svg";
 import TwoIcon from "./assets/icons/numeric-2.svg";

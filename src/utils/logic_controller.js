@@ -1,4 +1,4 @@
-import * as comp from "./components";
+import * as comp from "../components/components";
 
 
 const board = comp.Board();
