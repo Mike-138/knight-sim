@@ -6,6 +6,7 @@ const board = comp.Board();
 const _cells = board.getElementsByClassName("cell");
 let _activeStart;
 let _activeTarget;
+let _currentposition = 0;
 
 const __startHandler = function() {
     // Returns null if there is no active start
@@ -45,8 +46,30 @@ const __addTargetHandler = () => {
     _addHandler(__targetHandler);
 }
 
+const __forwardHandler = function(array) {
+    if (_currentposition < array.length - 1) {
+        const knight = document.getElementsByClassName("knight");
+        knight.remove();
+        _currentposition++;
+        const square = document.querySelector(`[data-row="${array[_currentposition][0]}"][data-col="${array[_currentposition][1]}"]`);
+        square.append(comp.Knight());
+    }
+}
+
+const __backwardHandler = function(array) {
+    if (_currentposition > 0) {
+        const knight = document.getElementsByClassName("knight");
+        knight.remove();
+        _currentposition--;
+        const square = document.querySelector(`[data-row="${array[_currentposition][0]}"][data-col="${array[_currentposition][1]}"]`);
+        square.append(comp.Knight());
+    }
+}
+
 export {
     board,
     __addStartHandler,
     __addTargetHandler,
+    __forwardHandler,
+    __backwardHandler
 }
