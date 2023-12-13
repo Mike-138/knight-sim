@@ -57,6 +57,13 @@ const resetBoard = (array) => {
 
 let lastSelectedSolution;
 
+// Temporary implementation of navigation buttons
+const forwardButton = ContentButton("Go Forward");
+const backwardButton = ContentButton("Go Backward");
+
+let __activeForwardHandler;
+let __activeBackwardHandler;
+
 const SolutionContainer = (num, array) => {
     const container = document.createElement("details");
     const summary = document.createElement("summary");
@@ -95,6 +102,13 @@ const SolutionContainer = (num, array) => {
                 activeSquare.append(MOVE_NUMBER_ICON[currentMove]);
                 currentMove += 1;
             }
+            // Update navigation buttons depending on selected solution
+            forwardButton.removeEventListener("click", __activeForwardHandler);
+            backwardButton.removeEventListener("click", __activeBackwardHandler);
+            __activeForwardHandler = handler.__forwardHandler.bind(array);
+            __activeBackwardHandler = handler.__backwardHandler.bind(array);
+            forwardButton.addEventListener("click", __activeForwardHandler);
+            backwardButton.addEventListener("click", __activeBackwardHandler);
         }
     })
     container.append(summary, list);
@@ -136,6 +150,8 @@ const build = () => {
         handler.board,
         startButton,
         targetButton,
+        forwardButton,
+        backwardButton,
         resultButton,
         solutionDiv
     );
