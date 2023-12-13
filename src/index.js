@@ -1,4 +1,4 @@
-import * as display from "./display_controller";
+import * as display from "./context/display_controller";
 
 
 display.build();

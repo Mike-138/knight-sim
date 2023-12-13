@@ -1,5 +1,5 @@
-import "./styles/components.css";
-import KnightIcon from "./assets/icons/chess-knight.svg"
+import "../styles/components.css";
+import KnightIcon from "../assets/icons/chess-knight.svg"
 
 const Knight = () => {
     const container = document.createElement("img");

@@ -1,14 +1,15 @@
-import * as logic from "./utils/logic_controller";
-import ZeroIcon from "./assets/icons/numeric-0.svg";
-import OneIcon from "./assets/icons/numeric-1.svg";
-import TwoIcon from "./assets/icons/numeric-2.svg";
-import ThreeIcon from "./assets/icons/numeric-3.svg";
-import FourIcon from "./assets/icons/numeric-4.svg";
-import FiveIcon from "./assets/icons/numeric-5.svg";
-import SixIcon from "./assets/icons/numeric-6.svg";
-import SevenIcon from "./assets/icons/numeric-7.svg";
-import EightIcon from "./assets/icons/numeric-8.svg";
-import NineIcon from "./assets/icons/numeric-9.svg";
+import * as knight from "../utils/knight";
+import ZeroIcon from "../assets/icons/numeric-0.svg";
+import OneIcon from "../assets/icons/numeric-1.svg";
+import TwoIcon from "../assets/icons/numeric-2.svg";
+import ThreeIcon from "../assets/icons/numeric-3.svg";
+import FourIcon from "../assets/icons/numeric-4.svg";
+import FiveIcon from "../assets/icons/numeric-5.svg";
+import SixIcon from "../assets/icons/numeric-6.svg";
+import SevenIcon from "../assets/icons/numeric-7.svg";
+import EightIcon from "../assets/icons/numeric-8.svg";
+import NineIcon from "../assets/icons/numeric-9.svg";
+import * as handler from "./handlers";
 
 
 const NumberContainer = (icon) => {
@@ -112,18 +113,18 @@ const build = () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         resetBoard(squares);
         solutionDiv.replaceChildren();
-        logic.__addStartHandlers();
+        handler.__addStartHandler();
     });
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         resetBoard(squares);
         solutionDiv.replaceChildren();
-        logic.__addTargetHandlers();
+        handler.__addTargetHandler();
     });
     resultButton.addEventListener("click", () => {
         const start = document.querySelector("[data-start]");
         const target = document.querySelector("[data-target]");
-        const results = logic.knightMoves([Number(start.dataset.row), Number(start.dataset.col)], [Number(target.dataset.row), Number(target.dataset.col)]);
+        const results = knight.knightMoves([Number(start.dataset.row), Number(start.dataset.col)], [Number(target.dataset.row), Number(target.dataset.col)]);
         const listOfSolutions = [];
         for (let i = 0; i < results.length; i++) {
             listOfSolutions.push(SolutionContainer(i + 1, results[i]));
@@ -132,7 +133,7 @@ const build = () => {
     })
 
     document.body.append(
-        logic.board,
+        handler.board,
         startButton,
         targetButton,
         resultButton,
