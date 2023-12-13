@@ -46,24 +46,22 @@ const __addTargetHandler = () => {
     _addHandler(__targetHandler);
 }
 
-// This keyword to be bound to an array of solutions
-const __forwardHandler = function() {
-    if (_currentposition < this.length - 1) {
+const __forwardHandler = function(array) {
+    if (_currentposition < array.length - 1) {
         const knight = document.querySelector(".knight");
         knight.remove();
         _currentposition++;
-        const square = document.querySelector(`[data-row="${this[_currentposition][0]}"][data-col="${this[_currentposition][1]}"]`);
+        const square = document.querySelector(`[data-row="${array[_currentposition][0]}"][data-col="${array[_currentposition][1]}"]`);
         square.append(comp.Knight());
     }
 }
 
-// This keyword to be bound to an array of solutions
-const __backwardHandler = function() {
+const __backwardHandler = function(array) {
     if (_currentposition > 0) {
         const knight = document.querySelector(".knight");
         knight.remove();
         _currentposition--;
-        const square = document.querySelector(`[data-row="${this[_currentposition][0]}"][data-col="${this[_currentposition][1]}"]`);
+        const square = document.querySelector(`[data-row="${array[_currentposition][0]}"][data-col="${array[_currentposition][1]}"]`);
         square.append(comp.Knight());
     }
 }

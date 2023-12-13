@@ -109,8 +109,14 @@ const SolutionContainer = (num, array) => {
             // Update navigation buttons depending on selected solution
             forwardButton.removeEventListener("click", __activeForwardHandler);
             backwardButton.removeEventListener("click", __activeBackwardHandler);
-            __activeForwardHandler = handler.__forwardHandler.bind(array);
-            __activeBackwardHandler = handler.__backwardHandler.bind(array);
+            __activeForwardHandler = () => {
+                handler.__forwardHandler(array);
+                hideNumber(array);
+            };
+            __activeBackwardHandler = () => {
+                handler.__backwardHandler(array);
+                hideNumber(array);
+            };
             forwardButton.addEventListener("click", __activeForwardHandler);
             backwardButton.addEventListener("click", __activeBackwardHandler);
         }
