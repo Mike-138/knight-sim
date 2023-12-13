@@ -12,6 +12,12 @@ const _getMoves = (graph, child, path = [], result = []) => {
     return result
 }
 
+/**
+ * Returns an array containing all shortest paths from start to target following the given moves
+ * @param   {Array} start  An array of 2 integers between 0 and 7
+ * @param   {Array} target An array of 2 integers between 0 and 7
+ * @returns {Array}        An array of arrays containing arrays of 2 integers between 0 and 7
+ */
 const knightMoves = (start, target) => {
     const moves = [
         [1, 2],
@@ -64,6 +70,6 @@ const knightMoves = (start, target) => {
     return _getMoves(graph, JSON.stringify(target));
 }
 
-export {
+module.exports = {
     knightMoves
 }
