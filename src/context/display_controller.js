@@ -37,11 +37,15 @@ const ContentButton = (content) => {
     return container;
 }
 
-const hideNumber = (square, numberIcon) => {
-    if (square.querySelector(".knight") !== null) {
-        numberIcon.classList.add("hidden");
-    } else {
-        numberIcon.classList.remove("hidden");
+const hideNumber = (array) => {
+    for (const item of array) {
+        const square = document.querySelector(`[data-row="${item[0]}"][data-col="${item[1]}"]`);
+        const number = square.querySelector(".number");
+        if (square.querySelector(".knight") !== null) {
+            number.classList.add("hidden");
+        } else {
+            number.classList.remove("hidden");
+        }
     }
 }
 
@@ -98,10 +102,10 @@ const SolutionContainer = (num, array) => {
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
                 activeSquare.style.backgroundColor = "blue";
-                hideNumber(activeSquare, MOVE_NUMBER_ICON[currentMove]);
                 activeSquare.append(MOVE_NUMBER_ICON[currentMove]);
                 currentMove += 1;
             }
+            hideNumber(array);
             // Update navigation buttons depending on selected solution
             forwardButton.removeEventListener("click", __activeForwardHandler);
             backwardButton.removeEventListener("click", __activeBackwardHandler);
