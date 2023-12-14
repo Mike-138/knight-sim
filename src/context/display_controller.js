@@ -11,6 +11,7 @@ import EightIcon from "../assets/icons/numeric-8.svg";
 import NineIcon from "../assets/icons/numeric-9.svg";
 import * as handler from "./handlers";
 import * as knightUtil from "../utils/return-knight";
+import * as boardUtil from "../utils/board";
 
 
 const NumberContainer = (icon) => {
@@ -36,18 +37,6 @@ const ContentButton = (content) => {
     const container = document.createElement("button");
     container.textContent = content;
     return container;
-}
-
-const hideNumber = (array) => {
-    for (const item of array) {
-        const square = document.querySelector(`[data-row="${item[0]}"][data-col="${item[1]}"]`);
-        const number = square.querySelector(".number");
-        if (square.querySelector(".knight") !== null) {
-            number.classList.add("hidden");
-        } else {
-            number.classList.remove("hidden");
-        }
-    }
 }
 
 const resetBoard = (array) => {
@@ -107,17 +96,17 @@ const SolutionContainer = (num, array) => {
                 currentMove += 1;
             }
             knightUtil.returnKnight();
-            hideNumber(array);
+            boardUtil.hideNumber(array);
             // Update navigation buttons depending on selected solution
             forwardButton.removeEventListener("click", __activeForwardHandler);
             backwardButton.removeEventListener("click", __activeBackwardHandler);
             __activeForwardHandler = () => {
                 handler.__forwardHandler(array);
-                hideNumber(array);
+                boardUtil.hideNumber(array);
             };
             __activeBackwardHandler = () => {
                 handler.__backwardHandler(array);
-                hideNumber(array);
+                boardUtil.hideNumber(array);
             };
             forwardButton.addEventListener("click", __activeForwardHandler);
             backwardButton.addEventListener("click", __activeBackwardHandler);
