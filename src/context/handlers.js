@@ -1,4 +1,5 @@
 import * as comp from "../components/components";
+import * as knightUtil from "../utils/return-knight";
 
 
 const board = comp.Board();
@@ -6,7 +7,6 @@ const board = comp.Board();
 const _cells = board.getElementsByClassName("cell");
 let _activeStart;
 let _activeTarget;
-let _currentposition = 0;
 
 const __startHandler = function() {
     // Returns null if there is no active start
@@ -47,29 +47,23 @@ const __addTargetHandler = () => {
 }
 
 const __forwardHandler = function(array) {
-    if (_currentposition < array.length - 1) {
+    if (knightUtil.getCurrentPosition() < array.length - 1) {
         const knight = document.querySelector(".knight");
         knight.remove();
-        _currentposition++;
-        const square = document.querySelector(`[data-row="${array[_currentposition][0]}"][data-col="${array[_currentposition][1]}"]`);
+        knightUtil.incrementPosition();
+        const square = document.querySelector(`[data-row="${array[knightUtil.getCurrentPosition()][0]}"][data-col="${array[knightUtil.getCurrentPosition()][1]}"]`);
         square.append(comp.Knight());
     }
 }
 
 const __backwardHandler = function(array) {
-    if (_currentposition > 0) {
+    if (knightUtil.getCurrentPosition() > 0) {
         const knight = document.querySelector(".knight");
         knight.remove();
-        _currentposition--;
-        const square = document.querySelector(`[data-row="${array[_currentposition][0]}"][data-col="${array[_currentposition][1]}"]`);
+        knightUtil.decrementPosition();
+        const square = document.querySelector(`[data-row="${array[knightUtil.getCurrentPosition()][0]}"][data-col="${array[knightUtil.getCurrentPosition()][1]}"]`);
         square.append(comp.Knight());
     }
-}
-
-const returnKnight = () => {
-    document.querySelector(".knight").remove();
-    document.querySelector('[data-start="true"]').append(comp.Knight());
-    _currentposition = 0;
 }
 
 export {
@@ -77,6 +71,5 @@ export {
     __addStartHandler,
     __addTargetHandler,
     __forwardHandler,
-    __backwardHandler,
-    returnKnight
+    __backwardHandler
 }

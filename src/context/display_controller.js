@@ -10,6 +10,7 @@ import SevenIcon from "../assets/icons/numeric-7.svg";
 import EightIcon from "../assets/icons/numeric-8.svg";
 import NineIcon from "../assets/icons/numeric-9.svg";
 import * as handler from "./handlers";
+import * as knightUtil from "../utils/return-knight";
 
 
 const NumberContainer = (icon) => {
@@ -105,7 +106,7 @@ const SolutionContainer = (num, array) => {
                 activeSquare.append(MOVE_NUMBER_ICON[currentMove]);
                 currentMove += 1;
             }
-            handler.returnKnight();
+            knightUtil.returnKnight();
             hideNumber(array);
             // Update navigation buttons depending on selected solution
             forwardButton.removeEventListener("click", __activeForwardHandler);
