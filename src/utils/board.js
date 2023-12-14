@@ -10,6 +10,17 @@ const hideNumber = (array) => {
     }
 }
 
+const resetBoard = (array) => {
+    array.forEach((item) => {
+        item.style.removeProperty("background-color");
+        const numberIcon = item.querySelector(".number");
+        if (numberIcon) {
+            item.removeChild(numberIcon);
+        }
+    });
+}
+
 export {
-    hideNumber
+    hideNumber,
+    resetBoard
 }

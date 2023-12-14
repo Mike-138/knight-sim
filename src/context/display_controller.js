@@ -39,16 +39,6 @@ const ContentButton = (content) => {
     return container;
 }
 
-const resetBoard = (array) => {
-    array.forEach((item) => {
-        item.style.removeProperty("background-color");
-        const numberIcon = item.querySelector(".number");
-        if (numberIcon) {
-            item.removeChild(numberIcon);
-        }
-    });
-}
-
 let lastSelectedSolution;
 
 // Temporary implementation of navigation buttons
@@ -77,7 +67,7 @@ const SolutionContainer = (num, array) => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         // Condition ensures deselection only occurs upon toggling the active detail off
         if (lastSelectedSolution === event.target) {
-            resetBoard(squares);
+            boardUtil.resetBoard(squares);
         }
         // Only add blue background when toggled open
         if (event.target.open) {
@@ -87,7 +77,7 @@ const SolutionContainer = (num, array) => {
             }
             lastSelectedSolution = event.target;
             // Necessary to clear squares on this line when switching between solutions without toggling last solution off first
-            resetBoard(squares);
+            boardUtil.resetBoard(squares);
             let currentMove = 0;
             for (const square of array) {
                 const activeSquare = document.querySelector(`[data-row="${square[0]}"][data-col="${square[1]}"]`);
@@ -126,13 +116,13 @@ const build = () => {
 
     startButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
-        resetBoard(squares);
+        boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
         handler.__addStartHandler();
     });
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
-        resetBoard(squares);
+        boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
         handler.__addTargetHandler();
     });
