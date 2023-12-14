@@ -13,9 +13,12 @@ const decrementPosition = () => {
 }
 
 const returnKnight = () => {
-    document.querySelector(".knight").remove();
-    document.querySelector('[data-start="true"]').append(comp.Knight());
-    currentPosition = 0;
+    const knight = document.querySelector(".knight");
+    if (knight) {
+        document.querySelector(".knight").remove();
+        document.querySelector('[data-start="true"]').append(comp.Knight());
+        currentPosition = 0;
+    }
 }
 
 export {

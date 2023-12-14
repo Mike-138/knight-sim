@@ -119,12 +119,14 @@ const build = () => {
         boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
         handler.__addStartHandler();
+        knightUtil.returnKnight();
     });
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
         handler.__addTargetHandler();
+        knightUtil.returnKnight();
     });
     resultButton.addEventListener("click", () => {
         const start = document.querySelector("[data-start]");
