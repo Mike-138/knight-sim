@@ -49,6 +49,11 @@ const backwardButton = ContentButton("Go Backward");
 let __activeForwardHandler;
 let __activeBackwardHandler;
 
+const disableNavigation = () => {
+    forwardButton.removeEventListener("click", __activeForwardHandler);
+    backwardButton.removeEventListener("click", __activeBackwardHandler);
+}
+
 const SolutionContainer = (num, array) => {
     const container = document.createElement("details");
     const summary = document.createElement("summary");
@@ -127,6 +132,7 @@ const build = () => {
     startButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
+        disableNavigation();
         solutionDiv.replaceChildren();
         cellHandler = handler.__startHandler;
         knightUtil.returnKnight();
@@ -134,6 +140,7 @@ const build = () => {
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
+        disableNavigation();
         solutionDiv.replaceChildren();
         cellHandler = handler.__targetHandler;
         knightUtil.returnKnight();
