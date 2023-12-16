@@ -116,20 +116,26 @@ const build = () => {
     const targetButton = ContentButton("Select Target");
     const resultButton = ContentButton("Find Shortest Paths");
 
+    let cellHandler = (element) => undefined;
     const _cells = board.getElementsByClassName("cell");
+    for (const cell of _cells) {
+        cell.addEventListener("mousedown", (event) => {
+            cellHandler(event.target);
+        });
+    }
 
     startButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
-        handler.__addStartHandler(_cells);
+        cellHandler = handler.__startHandler;
         knightUtil.returnKnight();
     });
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
-        handler.__addTargetHandler(_cells);
+        cellHandler = handler.__targetHandler;
         knightUtil.returnKnight();
     });
     resultButton.addEventListener("click", () => {
@@ -141,7 +147,7 @@ const build = () => {
             listOfSolutions.push(SolutionContainer(i + 1, results[i]));
         }
         solutionDiv.replaceChildren(...listOfSolutions);
-        handler.__removeAllHandlers(_cells);
+        cellHandler = (element) => undefined;
     })
 
     document.body.append(
