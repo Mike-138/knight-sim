@@ -27,10 +27,20 @@ const __targetHandler = function() {
     this.dataset.target = true;
 }
 
+const _removeHandlers = function(element) {
+    element.removeEventListener("mousedown", __startHandler);
+    element.removeEventListener("mousedown", __targetHandler);
+}
+
+const __removeAllHandlers = function(HTMLcollection) {
+    for (const element of HTMLcollection) {
+        _removeHandlers(element);
+    }
+}
+
 const _addHandler = function(HTMLcollection, handler) {
     for (const element of HTMLcollection) {
-        element.removeEventListener("mousedown", __startHandler);
-        element.removeEventListener("mousedown", __targetHandler);
+        _removeHandlers(element);
         element.addEventListener("mousedown", handler);
     }
 }
@@ -64,6 +74,7 @@ const __backwardHandler = function(array) {
 }
 
 export {
+    __removeAllHandlers,
     __addStartHandler,
     __addTargetHandler,
     __forwardHandler,

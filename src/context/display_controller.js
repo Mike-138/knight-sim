@@ -141,6 +141,7 @@ const build = () => {
             listOfSolutions.push(SolutionContainer(i + 1, results[i]));
         }
         solutionDiv.replaceChildren(...listOfSolutions);
+        handler.__removeAllHandlers(_cells);
     })
 
     document.body.append(
