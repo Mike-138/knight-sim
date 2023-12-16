@@ -1,3 +1,4 @@
+import * as comp from "../components/components";
 import * as knight from "../utils/knight";
 import ZeroIcon from "../assets/icons/numeric-0.svg";
 import OneIcon from "../assets/icons/numeric-1.svg";
@@ -110,22 +111,25 @@ const solutionDiv = document.createElement("div");
 
 const build = () => {
 
+    const board = comp.Board();
     const startButton = ContentButton("Select Start");
     const targetButton = ContentButton("Select Target");
     const resultButton = ContentButton("Find Shortest Paths");
+
+    const _cells = board.getElementsByClassName("cell");
 
     startButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
-        handler.__addStartHandler();
+        handler.__addStartHandler(_cells);
         knightUtil.returnKnight();
     });
     targetButton.addEventListener("click", () => {
         const squares = document.querySelectorAll("[style='background-color: blue;']");
         boardUtil.resetBoard(squares);
         solutionDiv.replaceChildren();
-        handler.__addTargetHandler();
+        handler.__addTargetHandler(_cells);
         knightUtil.returnKnight();
     });
     resultButton.addEventListener("click", () => {
@@ -140,7 +144,7 @@ const build = () => {
     })
 
     document.body.append(
-        handler.board,
+        board,
         startButton,
         targetButton,
         forwardButton,

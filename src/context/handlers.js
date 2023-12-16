@@ -2,9 +2,6 @@ import * as comp from "../components/components";
 import * as knightUtil from "../utils/return-knight";
 
 
-const board = comp.Board();
-// Use getElementsByClassName to return a live HTMLCollection
-const _cells = board.getElementsByClassName("cell");
 let _activeStart;
 let _activeTarget;
 
@@ -30,20 +27,20 @@ const __targetHandler = function() {
     this.dataset.target = true;
 }
 
-const _addHandler = function(handler) {
-    for (const cell of _cells) {
-        cell.removeEventListener("mousedown", __startHandler);
-        cell.removeEventListener("mousedown", __targetHandler);
-        cell.addEventListener("mousedown", handler);
+const _addHandler = function(HTMLcollection, handler) {
+    for (const element of HTMLcollection) {
+        element.removeEventListener("mousedown", __startHandler);
+        element.removeEventListener("mousedown", __targetHandler);
+        element.addEventListener("mousedown", handler);
     }
 }
 
-const __addStartHandler = () => {
-    _addHandler(__startHandler);
+const __addStartHandler = (HTMLcollection) => {
+    _addHandler(HTMLcollection, __startHandler);
 }
 
-const __addTargetHandler = () => {
-    _addHandler(__targetHandler);
+const __addTargetHandler = (HTMLcollection) => {
+    _addHandler(HTMLcollection, __targetHandler);
 }
 
 const __forwardHandler = function(array) {
@@ -67,7 +64,6 @@ const __backwardHandler = function(array) {
 }
 
 export {
-    board,
     __addStartHandler,
     __addTargetHandler,
     __forwardHandler,
