@@ -1,4 +1,5 @@
 import * as comp from "../components/components";
+import NumberContainer from "../components/NumberContainer";
 import * as knight from "../utils/knight";
 import ZeroIcon from "../assets/icons/numeric-0.svg";
 import OneIcon from "../assets/icons/numeric-1.svg";
@@ -14,13 +15,6 @@ import * as handler from "./handlers";
 import * as knightUtil from "../utils/return-knight";
 import * as boardUtil from "../utils/board";
 
-
-const NumberContainer = (icon) => {
-    const container = document.createElement("img");
-    container.src = icon;
-    container.classList.add("number");
-    return container;
-}
 
 const MOVE_NUMBER_ICON = [
     NumberContainer(ZeroIcon),
